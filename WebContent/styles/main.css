@@ -1,0 +1,303 @@
+@CHARSET "UTF-8";
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p{
+    margin: 0;
+    padding: 0;
+}
+body, button, input, select, textarea {
+    font: 12px/1.5 arial,\5b8b\4f53;
+    background-color: #b9b9b9;
+}
+div {
+    display: block;
+}
+li{
+	display: list-item;
+}
+ul, menu, dir {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+.main,.list{
+	min-height:100%;  
+	position: relative;  
+	width: 890px;
+	margin: 0 auto;
+}
+.title {
+	clear: both;
+    height: 30px;
+    margin-right:13%;
+    margin-top:1%;
+    line-height: 30px;
+    position: relative;
+	font-size:44px;
+	text-align:right;
+}
+.title strong{
+	font-size: 28px;
+	color: #000000;	
+}
+.bettingBox {
+    background: #fff;
+    width: 749px;
+    float: left;
+    border-right: 1px solid #dedede;
+    margin-bottom: -5000px;
+    padding-bottom: 5000px;
+}
+.blueTitle {
+    text-align: center;
+    width: 234px;
+}
+.title h2 {
+    float: left;
+}
+
+strong, b {
+    font-weight: bold;
+}
+.redBallBox {
+    width: 100%;
+    padding-right: 14px;
+    float: left;
+}
+.clearfix {
+    zoom: 1;
+}
+
+ol, ul {
+    list-style: none;
+}
+.redBallBox li {
+    width: 56px;
+    margin: 0 28px;
+    margin-bottom:15px;
+    float: left;
+    text-align: center;
+    height: 62px;
+}
+.redBallBox li a, .redBallBox li a:visited {
+    background: url(../images/ball_gray.png) 0 0 no-repeat;
+    width: 56px;
+    height: 62px;
+    display: block;
+    text-align: center;
+    line-height: 62px;
+    font-size: 28px;
+    font-weight: 700;
+    overflow: hidden;
+    outline: 0;
+    color: red;
+}
+
+.blueBallBox {
+    width: 100%;
+    float: left;
+}
+.blueBallBox li {
+   	width: 56px;
+    margin: 0 28px;
+    margin-bottom:15px;
+    float: left;
+    text-align: center;
+    height: 62px;
+}
+.blueBallBox li a, .blueBallBox li a:visited {
+    background: url(../images/ball_gray.png) 0 0 no-repeat;
+    width: 56px;
+    height: 62px;
+    display: block;
+    text-align: center;
+    line-height: 62px;
+    font-size: 28px;
+    font-weight: 700;
+    overflow: hidden;
+    outline: 0;
+    color: blue;
+}
+
+.redClick{
+    background: url(../images/newball.png) no-repeat -70px 0;
+    width: 33px;
+    height: 33px;
+    display: block;
+    text-align: center;
+    line-height: 34px;
+    font-size: 16px;
+    font-weight: 700;
+    overflow: hidden;
+    outline: 0;
+   
+}
+
+a:link, a:visited {
+    color: #333;
+}
+a {
+    text-decoration: none;
+}
+.random_selection {
+    clear: both;
+    float: none;
+    text-align: right;
+    color: #717171;
+    line-height: 22px;
+    padding-top: 2px;
+    padding-right: 10px;
+}
+.selectInfo {
+    height: 20px;
+    clear: both;
+    float: none;
+    text-align: center;
+    padding-top: 11px;
+    font-size: 22px;
+}
+.selectInfo strong {
+    padding: 0 5px;
+}
+.c_ba2636, a.c_ba2636:link, a.c_ba2636:visited {
+    color: #ba2636;
+}
+.c_1e50a2, a.c_1e50a2:link, a.c_1e50a2:visited {
+    color: #1e50a2;
+}
+strong, b {
+    font-weight: bold;
+}
+
+.random_selection .radom_redbtn:link, .random_selection .radom_redbtn:visited {
+    color: #ba2636;
+}
+.random_selection .radom_bluebtn:link, .random_selection .radom_bluebtn:visited ,.radom_bluebtn jtip{
+    color: #4260a4;
+}
+.random_selection a {
+    height: 20px;
+    width: 58px;
+    line-height: 20px;
+    border: 1px solid #c9c9c9;
+    border-radius: 2px;
+    display: inline-block;
+    background: url(http://pimg1.126.net/caipiao/img/lotteryBet/szc/ssq_repeat_20844af.png?fe76e3386a52616674d6023de9f4ffab) repeat-x 0 0;
+    text-align: center;
+    text-align: center;
+    margin: 0 7px 0 4px;
+}
+.menuBox .gameMenu li a, .navList li a, .selectNum .title a, .random_selection a, .selected_btnbox .selected_btn {
+    outline: 0;
+}
+.random_selection a.clearing, .random_selection a.clearing:visited {
+    cursor: pointer;
+    display: inline;
+    background: 0 0;
+    border: 0;
+    color: #717171;
+    margin: 0;
+    width: auto;
+    padding: 0;
+}
+.c_ba2636{
+	margin: 0 12px;
+}
+.clearing , .confirm{
+	border-radius: 10px;
+	background-color: #7f7f7f;
+    border: none;
+    color: white;
+    padding: 8px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.confirm2, .buy{
+	border-radius: 10px;
+	background-color: #7f7f7f;
+    border: none;
+    color: white;
+    padding: 0px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0px 12px;
+    cursor: pointer;
+}
+.selectInfo a:hover{
+	background-color: #c4c4c4;
+	color: red;
+}
+.selectInfo a:active {
+    background-color: #000000;
+}
+.selectBySelf{
+	width: 33%;
+	float:right;	
+}
+.menu{
+	float: left;
+	border-radius: 10px;
+	background-color: #7f7f7f;
+    border: none;
+    color: white;
+    padding: 8px 22px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.menu span{
+	text-align: center;
+	font-size: 28px;
+	margin-left: 5px;
+}
+.listContext{
+	padding-top:4%;
+	font-size: 28px;
+	width: 80%;
+	margin: 0 auto;
+	height: 590px;
+}
+.redStyle{
+	color: red;
+}
+.blueStyle{
+	color: blue;
+}
+.recordTimes{
+	text-align: right;
+	margin-right:10%;
+	font-size: 22px;
+}
+.recordTimes stong{
+	border: none;
+    color: white;
+    padding: 17px 10px;
+    text-decoration: none;
+    display: inline-block;
+  	margin: 10px 10px;
+    cursor: pointer;
+}
+.recordTimes img{
+	width: 16px;
+	height: 19px;
+}
+.confimBet{
+	height: 47px;
+	color: white;
+	text-align: center;
+	font-size: 22px;
+	line-height: 47px;
+}
+.confimBet a{
+	float: right;
+	margin-right: 20%;
+}

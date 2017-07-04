@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+            http://www.springframework.org/schema/jee 
+            http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+            http://www.springframework.org/schema/aop 
+            http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+            http://www.springframework.org/schema/context 
+            http://www.springframework.org/schema/context/spring-context-4.0.xsd
+            http://www.springframework.org/schema/tx 
+            http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc" default-lazy-init="false">
+
+	<bean id="readProperty" class="com.jetair.common.property.ReadPropertyPlaceHolderConfigurer" primary="true">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+            </list>
+        </property>
+    </bean>
+	<!-- 异步线程池 -->
+	<bean id="threadPool" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+	  <!-- 核心线程数  -->
+	  <property name="corePoolSize" value="10" />
+	  <!-- 最大线程数 -->
+	  <property name="maxPoolSize" value="50" />
+	  <!-- 队列最大长度 >=mainExecutor.maxSize -->
+	  <property name="queueCapacity" value="1000" />
+	  <!-- 线程池维护线程所允许的空闲时间 -->
+	  <property name="keepAliveSeconds" value="300" />
+	  <!-- 线程池对拒绝任务(无线程可用)的处理策略 -->
+	  <property name="rejectedExecutionHandler">
+	    <bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy" />
+	  </property>
+	</bean>
+	<import resource="classpath:context/activemq_config.xml"/>
+<!-- 	<import resource="classpath:applicationContext-hu.xml"/> -->
+	<mvc:annotation-driven />
+	
+
+	<bean id="masterDataSource" name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driverClassName}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="initialPoolSize" value="${jdbc.initialPoolSize}" />
+		<property name="minPoolSize" value="${jdbc.minPoolSize}" />
+		<property name="maxPoolSize" value="${jdbc.maxPoolSize}" />
+		<property name="maxIdleTime" value="${jdbc.maxIdleTime}" />
+		<property name="acquireRetryAttempts" value="${jdbc.acquireRetryAttempts}" />
+		<property name="idleConnectionTestPeriod" value="${jdbc.idleConnectionTestPeriod}" />
+		<property name="acquireIncrement" value="${jdbc.acquireIncrement}" />
+		<property name="maxStatements" value="${jdbc.maxStatements}" />
+		
+	</bean>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:context/sql-map-config.xml" />
+		<property name="dataSource" ref="masterDataSource" />
+		<property name="mapperLocations" value="classpath:sqlmappers/*.xml"/>
+	</bean>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.jetair.db.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="masterDataSource" />
+	</bean>
+	 <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="delete*" propagation="REQUIRED" 
+                rollback-for="java.sql.SQLException,java.lang.RuntimeException"  />
+            <tx:method name="save*" propagation="REQUIRED" 
+                rollback-for="java.sql.SQLException,java.lang.RuntimeException" />
+            <tx:method name="update*" propagation="REQUIRED" 
+                rollback-for="java.sql.SQLException,java.lang.RuntimeException" />
+            <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="query*" propagation="SUPPORTS" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>  
+        <aop:pointcut id="serviceTransaction"  
+            expression="execution(* com.jetair.db.dao..*.*(..))" />  
+        <aop:advisor advice-ref="txAdvice"  
+            pointcut-ref="serviceTransaction" />  
+    </aop:config> 	
+	
+	
+	<!-- 开启注解方式声明事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<context:component-scan base-package="com.jetair.* *.dao" annotation-config="true" />
+
+	<context:component-scan base-package="com.jetair.* *.manager" annotation-config="true" />
+
+	<context:component-scan base-package="com.jetair.* *.service" annotation-config="true" />
+	
+</beans>

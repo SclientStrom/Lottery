@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<!-- Defined Which jdbc driver should load -->
+	<classPathEntry location="WebContent/WEB-INF/lib/mysql-connector-java-5.1.28.jar" />
+
+	<context id="infoGuardian" targetRuntime="MyBatis3">
+		<plugin type="com.jetair.mybatis.generator.plugin.OraclePaginationPlugin" />
+		<!-- 注释 -->
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" /><!-- 是否取消注释 -->
+			<property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳 -->
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.1.223:3306/lottery?characterEncoding=UTF-8" userId="appuser" password="123456">
+		</jdbcConnection>
+
+		<!-- 只有一个属于forceBigDecimals，默认false。 如果字段精确超过0，生成BigDecimal 如果字段精确是0，总长度10-18生成Long;如果字段精确是0， 总长5-9生成Integer; 如果字段精确是0，总长小于5生成Short; 如果forceBigDecimals为true,统一生成BigDecimal -->
+		<javaTypeResolver>
+			<!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- 生成vo、model -->
+		<javaModelGenerator targetPackage="com.jetair.db.model" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<!-- 是否针对string类型的字段在set的时候进行trim调用 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!-- 生成mapxml文件 -->
+		<sqlMapGenerator targetPackage="sqlmappers" targetProject="src/main/resources" />
+
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.jetair.db.dao" targetProject="src/main/java">
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+
+		<table tableName="lottery_passenger" domainObjectName="LotteryPassenger" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+		</table>
+		
+		<table tableName="lottery_record" domainObjectName="LotteryRecord" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+		</table>
+		
+	</context>
+</generatorConfiguration>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jetair.db.dao.LotteryRecordDao" >
+  <resultMap id="BaseResultMap" type="com.jetair.db.model.LotteryRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="red_ball_record" property="redBallRecord" jdbcType="VARCHAR" />
+    <result column="blue_ball_record" property="blueBallRecord" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="record_id" property="recordId" jdbcType="INTEGER" />
+    <result column="bet_count" property="betCount" jdbcType="INTEGER" />
+    <result column="point" property="point" jdbcType="VARCHAR" />
+    <result column="times" property="times" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, red_ball_record, blue_ball_record, type, record_id, bet_count, point,times
+  </sql>
+  <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from lottery_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <insert id="insert" parameterType="com.jetair.db.model.LotteryRecord" >
+    insert into lottery_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="redBallRecord != null" >
+        red_ball_record,
+      </if>
+      <if test="blueBallRecord != null" >
+        blue_ball_record,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="recordId != null" >
+        record_id,
+      </if>
+      <if test="betCount != null" >
+        bet_count,
+      </if>
+      <if test="point != null" >
+        point,
+      </if>
+      <if test="times != null" >
+        times,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="redBallRecord != null" >
+        #{redBallRecord,jdbcType=VARCHAR},
+      </if>
+      <if test="blueBallRecord != null" >
+        #{blueBallRecord,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="recordId != null" >
+        #{recordId,jdbcType=INTEGER},
+      </if>
+      <if test="betCount != null" >
+        #{betCount,jdbcType=INTEGER},
+      </if>
+      <if test="point != null" >
+        #{point,jdbcType=VARCHAR},
+      </if>
+      <if test="times != null" >
+        #{times,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.jetair.db.model.LotteryRecord" >
+    update lottery_record
+    <set >
+      <if test="redBallRecord != null" >
+        red_ball_record = #{redBallRecord,jdbcType=VARCHAR},
+      </if>
+      <if test="blueBallRecord != null" >
+        blue_ball_record = #{blueBallRecord,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="recordId != null" >
+        record_id = #{recordId,jdbcType=INTEGER},
+      </if>
+      <if test="betCount != null" >
+        bet_count = #{betCount,jdbcType=INTEGER},
+      </if>
+      <if test="point != null" >
+        point = #{point,jdbcType=VARCHAR},
+      </if>
+         <if test="times != null" >
+        times = #{times,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <sql id="sqlfileders" >
+    <bind name="fileders" value="#{'id':'id','redBallRecord':'red_ball_record','blueBallRecord':'blue_ball_record','type':'type','recordId':'record_id','betCount':'bet_count','point':'point'}" />
+    <bind name="javapropertys" value="#{'id':'id','red_ball_record':'redBallRecord','blue_ball_record':'blueBallRecord','type':'type','record_id':'recordId','bet_count':'betCount','point':'point'}" />
+  </sql>
+</mapper>

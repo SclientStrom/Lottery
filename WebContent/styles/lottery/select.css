@@ -1,0 +1,46 @@
+@CHARSET "UTF-8";
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p{
+    margin: 0;
+    padding: 0;
+}
+body, button, input, select, textarea {
+    font: 2em arial,\5b8b\4f53;
+}
+.main{
+	width:100%;
+	margin: 0 auto;
+}
+.title {
+	font-size:1.5em;
+	color: #c4c4c4;
+	text-align:right;
+    clear: both;
+    position: relative;
+    padding-top: 1%;
+    padding-right: 2%;
+}
+a {
+    text-decoration: none;
+}
+strong, b {
+    font-weight: bold;
+}
+.redBallBox{
+	margin-top:2%;
+	float:none;
+	width:100%;
+	margin: 0 auto;
+}
+ol, ul {
+    list-style: none;
+}
+.redBallBox li {
+    width: 4.2em;
+    margin:0 2em;
+    float: left;
+    text-align: center;
+    height: 50px;
+}
+.red_Title{
+	text-align: center;
+}
